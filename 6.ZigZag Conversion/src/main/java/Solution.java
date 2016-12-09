@@ -24,7 +24,7 @@ public class Solution {
     convert("PAYPALISHIRING", 3) should return "PAHNAPLSIIGYIR".
      */
     public static String convert(String s, int numRows) {
-        if (s.length() == 0 || numRows <= 1) {
+        if (s == null || s.length() == 0 || numRows <= 1) {
             return s;
         }
 
