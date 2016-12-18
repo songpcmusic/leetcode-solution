@@ -9,32 +9,43 @@ public class Solution {
     Example1: x = 123, return 321
     Example2: x = -123, return -321
      */
-    public int reverse(int x) {
+    public static int reverse(int x) {
         if(x == 0) {
             return x;
         }
 
-        String source = String.valueOf(x);
-        String result = "";
-
-        int end = 0;
-        if(source.charAt(0) == '-') {
-            result = result + "-";
-            end = 1;
+        int copy = x;
+        // 如果x小于0
+        if (x < 0) {
+            copy = 0 - copy;
         }
 
-        for(int i = source.length() - 1; i >= end; i--) {
-            result = result + source.charAt(i);
+        int result = 0;
+
+        while (copy > 0) {
+            if (result == 0) {
+                result = result + (copy % 10);
+            } else {
+                // overflow
+                if ((Integer.MAX_VALUE - (copy % 10)) / result < 10) {
+                    return 0;
+                }
+
+                result = result * 10 + (copy % 10);
+            }
+
+
+            copy = copy / 10;
         }
 
-        /**
-         * 需要考虑int越界的问题
-         */
-        try {
-            return Integer.valueOf(result);
-        } catch (Exception e) {
-            return 0;
+        if (x < 0) {
+            result = 0 - result;
         }
 
+        return result;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(reverse(1534236469));
     }
 }
