@@ -30,26 +30,26 @@ public class Solution {
             }
 
             int target = 0 - nums[i];
-            int j = i + 1, k = nums.length - 1;
+            int low = i + 1, high = nums.length - 1;
 
-            while (j < k) {
-                if (nums[j] + nums[k] == target) {
-                    result.add(Arrays.asList(nums[i], nums[j], nums[k]));
+            while (low < high) {
+                if (nums[low] + nums[high] == target) {
+                    result.add(Arrays.asList(nums[i], nums[low], nums[high]));
 
                     // 先执行去重 不然会超市
-                    while (j < k && nums[k] == nums[k - 1]) {
-                        k--;
+                    while (low < high && nums[high] == nums[high - 1]) {
+                        high--;
                     }
-                    while (j < k && nums[j] == nums[j + 1]) {
-                        j++;
+                    while (low < high && nums[low] == nums[low + 1]) {
+                        low++;
                     }
 
-                    j++;
-                    k--;
-                } else if (nums[j] + nums[k] < target) {
-                    j++;
+                    low++;
+                    high--;
+                } else if (nums[low] + nums[high] < target) {
+                    low++;
                 } else {
-                    k--;
+                    high--;
                 }
             }
         }
