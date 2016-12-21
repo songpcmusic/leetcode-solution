@@ -23,7 +23,8 @@ public class Solution {
         // 排序
         Arrays.sort(nums);
 
-        for (int i = 0; i < nums.length; i++) {
+        // 只执行到倒数第三位
+        for (int i = 0; i < nums.length - 2; i++) {
             if (i - 1 >= 0 && nums[i] == nums[i - 1]) {
                 continue;
             }
@@ -34,15 +35,17 @@ public class Solution {
             while (j < k) {
                 if (nums[j] + nums[k] == target) {
                     result.add(Arrays.asList(nums[i], nums[j], nums[k]));
-                    j++;
-                    k--;
 
-                    while (j < k && nums[k] == nums[k + 1]) {
+                    // 先执行去重 不然会超市
+                    while (j < k && nums[k] == nums[k - 1]) {
                         k--;
                     }
-                    while (j < k && nums[j] == nums[j - 1]) {
+                    while (j < k && nums[j] == nums[j + 1]) {
                         j++;
                     }
+
+                    j++;
+                    k--;
                 } else if (nums[j] + nums[k] < target) {
                     j++;
                 } else {
